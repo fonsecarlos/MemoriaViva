@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EspacoMemoriaVivaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADDRESS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Suplement" Type="varchar" MaxLength="100" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
+          <Property Name="Neighborhood" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="State" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Person_Id" Type="int" Nullable="false" />
+          <Property Name="CLIENTId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENT_FILE">
+          <Key>
+            <PropertyRef Name="Client_Id" />
+            <PropertyRef Name="File_Id" />
+          </Key>
+          <Property Name="Client_Id" Type="int" Nullable="false" />
+          <Property Name="File_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FILE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Format" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PERSON">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Cpf" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="Address_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="PHONE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PHONE_PERSON">
+          <Key>
+            <PropertyRef Name="Person_Id" />
+            <PropertyRef Name="Phone_Id" />
+          </Key>
+          <Property Name="Person_Id" Type="int" Nullable="false" />
+          <Property Name="Phone_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROFESSIONAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Person_Id" Type="int" Nullable="false" />
+          <Property Name="ProfessionalType_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROFESSIONAL_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SERVICE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Professional_Id" Type="int" Nullable="false" />
+          <Property Name="ServiceProvider_Id" Type="int" Nullable="false" />
+          <Property Name="Client_Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SERVICE_FILE">
+          <Key>
+            <PropertyRef Name="File_Id" />
+            <PropertyRef Name="Service_Id" />
+          </Key>
+          <Property Name="File_Id" Type="int" Nullable="false" />
+          <Property Name="Service_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SERVICE_PROVIDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UNPAID_BILLS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="decimal" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="PaymentMethod_Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Service_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Person_Id" Type="int" Nullable="false" />
+          <Property Name="UserType_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="Address_Person">
+          <End Role="ADDRESS" Type="Self.ADDRESS" Multiplicity="0..1" />
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADDRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERSON">
+              <PropertyRef Name="Address_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_Service">
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="1" />
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCLIENT_FIL747101">
+          <End Role="FILE" Type="Self.FILE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CLIENT_FILE" Type="Self.CLIENT_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CLIENT_FILE">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCLIENT_FIL94015">
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CLIENT_FILE" Type="Self.CLIENT_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CLIENT_FILE">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPHONE_PERS435301">
+          <End Role="PHONE" Type="Self.PHONE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHONE_PERSON" Type="Self.PHONE_PERSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PHONE_PERSON">
+              <PropertyRef Name="Phone_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPHONE_PERS694756">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHONE_PERSON" Type="Self.PHONE_PERSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PHONE_PERSON">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSERVICE_FI356289">
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SERVICE_FILE" Type="Self.SERVICE_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE_FILE">
+              <PropertyRef Name="Service_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSERVICE_FI672429">
+          <End Role="FILE" Type="Self.FILE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SERVICE_FILE" Type="Self.SERVICE_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE_FILE">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Person_Client">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Person_id">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="PROFESSIONAL" Type="Self.PROFESSIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PROFESSIONAL">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Person_User">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Professional_ProfessionalType">
+          <End Role="PROFESSIONAL_TYPE" Type="Self.PROFESSIONAL_TYPE" Multiplicity="1" />
+          <End Role="PROFESSIONAL" Type="Self.PROFESSIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESSIONAL_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PROFESSIONAL">
+              <PropertyRef Name="ProfessionalType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Service_UnpaidBills">
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UNPAID_BILLS" Type="Self.UNPAID_BILLS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UNPAID_BILLS">
+              <PropertyRef Name="Service_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProvider_Service">
+          <End Role="SERVICE_PROVIDER" Type="Self.SERVICE_PROVIDER" Multiplicity="1" />
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICE_PROVIDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE">
+              <PropertyRef Name="ServiceProvider_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sevice_Professional">
+          <End Role="PROFESSIONAL" Type="Self.PROFESSIONAL" Multiplicity="1" />
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESSIONAL">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE">
+              <PropertyRef Name="Professional_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserType_User">
+          <End Role="USER_TYPE" Type="Self.USER_TYPE" Multiplicity="1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="UserType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EspacoMemoriaVivaModelStoreContainer">
+          <EntitySet Name="ADDRESS" EntityType="Self.ADDRESS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENT" EntityType="Self.CLIENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENT_FILE" EntityType="Self.CLIENT_FILE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FILE" EntityType="Self.FILE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSON" EntityType="Self.PERSON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHONE" EntityType="Self.PHONE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHONE_PERSON" EntityType="Self.PHONE_PERSON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROFESSIONAL" EntityType="Self.PROFESSIONAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROFESSIONAL_TYPE" EntityType="Self.PROFESSIONAL_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICE" EntityType="Self.SERVICE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICE_FILE" EntityType="Self.SERVICE_FILE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICE_PROVIDER" EntityType="Self.SERVICE_PROVIDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UNPAID_BILLS" EntityType="Self.UNPAID_BILLS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_TYPE" EntityType="Self.USER_TYPE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Address_Person" Association="Self.Address_Person">
+            <End Role="ADDRESS" EntitySet="ADDRESS" />
+            <End Role="PERSON" EntitySet="PERSON" />
+          </AssociationSet>
+          <AssociationSet Name="Client_Service" Association="Self.Client_Service">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="SERVICE" EntitySet="SERVICE" />
+          </AssociationSet>
+          <AssociationSet Name="FKCLIENT_FIL747101" Association="Self.FKCLIENT_FIL747101">
+            <End Role="FILE" EntitySet="FILE" />
+            <End Role="CLIENT_FILE" EntitySet="CLIENT_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FKCLIENT_FIL94015" Association="Self.FKCLIENT_FIL94015">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="CLIENT_FILE" EntitySet="CLIENT_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FKPHONE_PERS435301" Association="Self.FKPHONE_PERS435301">
+            <End Role="PHONE" EntitySet="PHONE" />
+            <End Role="PHONE_PERSON" EntitySet="PHONE_PERSON" />
+          </AssociationSet>
+          <AssociationSet Name="FKPHONE_PERS694756" Association="Self.FKPHONE_PERS694756">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="PHONE_PERSON" EntitySet="PHONE_PERSON" />
+          </AssociationSet>
+          <AssociationSet Name="FKSERVICE_FI356289" Association="Self.FKSERVICE_FI356289">
+            <End Role="SERVICE" EntitySet="SERVICE" />
+            <End Role="SERVICE_FILE" EntitySet="SERVICE_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FKSERVICE_FI672429" Association="Self.FKSERVICE_FI672429">
+            <End Role="FILE" EntitySet="FILE" />
+            <End Role="SERVICE_FILE" EntitySet="SERVICE_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="Person_Client" Association="Self.Person_Client">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="Person_id" Association="Self.Person_id">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="PROFESSIONAL" EntitySet="PROFESSIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="Person_User" Association="Self.Person_User">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="Professional_ProfessionalType" Association="Self.Professional_ProfessionalType">
+            <End Role="PROFESSIONAL_TYPE" EntitySet="PROFESSIONAL_TYPE" />
+            <End Role="PROFESSIONAL" EntitySet="PROFESSIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="Service_UnpaidBills" Association="Self.Service_UnpaidBills">
+            <End Role="SERVICE" EntitySet="SERVICE" />
+            <End Role="UNPAID_BILLS" EntitySet="UNPAID_BILLS" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProvider_Service" Association="Self.ServiceProvider_Service">
+            <End Role="SERVICE_PROVIDER" EntitySet="SERVICE_PROVIDER" />
+            <End Role="SERVICE" EntitySet="SERVICE" />
+          </AssociationSet>
+          <AssociationSet Name="Sevice_Professional" Association="Self.Sevice_Professional">
+            <End Role="PROFESSIONAL" EntitySet="PROFESSIONAL" />
+            <End Role="SERVICE" EntitySet="SERVICE" />
+          </AssociationSet>
+          <AssociationSet Name="UserType_User" Association="Self.UserType_User">
+            <End Role="USER_TYPE" EntitySet="USER_TYPE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EspacoMemoriaVivaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADDRESS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Suplement" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Neighborhood" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PERSON" Relationship="Self.Address_Person" FromRole="ADDRESS" ToRole="PERSON" />
+        </EntityType>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Person_Id" Type="Int32" Nullable="false" />
+          <Property Name="CLIENTId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SERVICE" Relationship="Self.Client_Service" FromRole="CLIENT" ToRole="SERVICE" />
+          <NavigationProperty Name="PERSON" Relationship="Self.Person_Client" FromRole="CLIENT" ToRole="PERSON" />
+          <NavigationProperty Name="FILE" Relationship="Self.CLIENT_FILE" FromRole="CLIENT" ToRole="FILE" />
+        </EntityType>
+        <EntityType Name="FILE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Format" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENT" Relationship="Self.CLIENT_FILE" FromRole="FILE" ToRole="CLIENT" />
+          <NavigationProperty Name="SERVICE" Relationship="Self.SERVICE_FILE" FromRole="FILE" ToRole="SERVICE" />
+        </EntityType>
+        <EntityType Name="PERSON">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_Id" Type="Int32" />
+          <NavigationProperty Name="ADDRESS" Relationship="Self.Address_Person" FromRole="PERSON" ToRole="ADDRESS" />
+          <NavigationProperty Name="CLIENT" Relationship="Self.Person_Client" FromRole="PERSON" ToRole="CLIENT" />
+          <NavigationProperty Name="PROFESSIONAL" Relationship="Self.Person_id" FromRole="PERSON" ToRole="PROFESSIONAL" />
+          <NavigationProperty Name="USER" Relationship="Self.Person_User" FromRole="PERSON" ToRole="USER" />
+          <NavigationProperty Name="PHONE" Relationship="Self.PHONE_PERSON" FromRole="PERSON" ToRole="PHONE" />
+        </EntityType>
+        <EntityType Name="PHONE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSON" Relationship="Self.PHONE_PERSON" FromRole="PHONE" ToRole="PERSON" />
+        </EntityType>
+        <EntityType Name="PROFESSIONAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Person_Id" Type="Int32" Nullable="false" />
+          <Property Name="ProfessionalType_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PERSON" Relationship="Self.Person_id" FromRole="PROFESSIONAL" ToRole="PERSON" />
+          <NavigationProperty Name="PROFESSIONAL_TYPE" Relationship="Self.Professional_ProfessionalType" FromRole="PROFESSIONAL" ToRole="PROFESSIONAL_TYPE" />
+          <NavigationProperty Name="SERVICE" Relationship="Self.Sevice_Professional" FromRole="PROFESSIONAL" ToRole="SERVICE" />
+        </EntityType>
+        <EntityType Name="PROFESSIONAL_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PROFESSIONAL" Relationship="Self.Professional_ProfessionalType" FromRole="PROFESSIONAL_TYPE" ToRole="PROFESSIONAL" />
+        </EntityType>
+        <EntityType Name="SERVICE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Professional_Id" Type="Int32" Nullable="false" />
+          <Property Name="ServiceProvider_Id" Type="Int32" Nullable="false" />
+          <Property Name="Client_Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENT" Relationship="Self.Client_Service" FromRole="SERVICE" ToRole="CLIENT" />
+          <NavigationProperty Name="PROFESSIONAL" Relationship="Self.Sevice_Professional" FromRole="SERVICE" ToRole="PROFESSIONAL" />
+          <NavigationProperty Name="UNPAID_BILLS" Relationship="Self.Service_UnpaidBills" FromRole="SERVICE" ToRole="UNPAID_BILLS" />
+          <NavigationProperty Name="SERVICE_PROVIDER" Relationship="Self.ServiceProvider_Service" FromRole="SERVICE" ToRole="SERVICE_PROVIDER" />
+          <NavigationProperty Name="FILE" Relationship="Self.SERVICE_FILE" FromRole="SERVICE" ToRole="FILE" />
+        </EntityType>
+        <EntityType Name="SERVICE_PROVIDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SERVICE" Relationship="Self.ServiceProvider_Service" FromRole="SERVICE_PROVIDER" ToRole="SERVICE" />
+        </EntityType>
+        <EntityType Name="UNPAID_BILLS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="PaymentMethod_Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Service_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SERVICE" Relationship="Self.Service_UnpaidBills" FromRole="UNPAID_BILLS" ToRole="SERVICE" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Person_Id" Type="Int32" Nullable="false" />
+          <Property Name="UserType_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PERSON" Relationship="Self.Person_User" FromRole="USER" ToRole="PERSON" />
+          <NavigationProperty Name="USER_TYPE" Relationship="Self.UserType_User" FromRole="USER" ToRole="USER_TYPE" />
+        </EntityType>
+        <EntityType Name="USER_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="Self.UserType_User" FromRole="USER_TYPE" ToRole="USER" />
+        </EntityType>
+        <Association Name="Address_Person">
+          <End Role="ADDRESS" Type="Self.ADDRESS" Multiplicity="0..1" />
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADDRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERSON">
+              <PropertyRef Name="Address_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_Service">
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="1" />
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Person_Client">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Person_id">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
+          <End Role="PROFESSIONAL" Type="Self.PROFESSIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PROFESSIONAL">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Person_User">
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Professional_ProfessionalType">
+          <End Role="PROFESSIONAL_TYPE" Type="Self.PROFESSIONAL_TYPE" Multiplicity="1" />
+          <End Role="PROFESSIONAL" Type="Self.PROFESSIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESSIONAL_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PROFESSIONAL">
+              <PropertyRef Name="ProfessionalType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sevice_Professional">
+          <End Role="PROFESSIONAL" Type="Self.PROFESSIONAL" Multiplicity="1" />
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROFESSIONAL">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE">
+              <PropertyRef Name="Professional_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Service_UnpaidBills">
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UNPAID_BILLS" Type="Self.UNPAID_BILLS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UNPAID_BILLS">
+              <PropertyRef Name="Service_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProvider_Service">
+          <End Role="SERVICE_PROVIDER" Type="Self.SERVICE_PROVIDER" Multiplicity="1" />
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICE_PROVIDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SERVICE">
+              <PropertyRef Name="ServiceProvider_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserType_User">
+          <End Role="USER_TYPE" Type="Self.USER_TYPE" Multiplicity="1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="UserType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENT_FILE">
+          <End Role="FILE" Type="Self.FILE" Multiplicity="*" />
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="*" />
+        </Association>
+        <Association Name="PHONE_PERSON">
+          <End Role="PHONE" Type="Self.PHONE" Multiplicity="*" />
+          <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
+        </Association>
+        <Association Name="SERVICE_FILE">
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
+          <End Role="FILE" Type="Self.FILE" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EspacoMemoriaVivaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADDRESS" EntityType="Self.ADDRESS" />
+          <EntitySet Name="CLIENT" EntityType="Self.CLIENT" />
+          <EntitySet Name="FILE" EntityType="Self.FILE" />
+          <EntitySet Name="PERSON" EntityType="Self.PERSON" />
+          <EntitySet Name="PHONE" EntityType="Self.PHONE" />
+          <EntitySet Name="PROFESSIONAL" EntityType="Self.PROFESSIONAL" />
+          <EntitySet Name="PROFESSIONAL_TYPE" EntityType="Self.PROFESSIONAL_TYPE" />
+          <EntitySet Name="SERVICE" EntityType="Self.SERVICE" />
+          <EntitySet Name="SERVICE_PROVIDER" EntityType="Self.SERVICE_PROVIDER" />
+          <EntitySet Name="UNPAID_BILLS" EntityType="Self.UNPAID_BILLS" />
+          <EntitySet Name="USER" EntityType="Self.USER" />
+          <EntitySet Name="USER_TYPE" EntityType="Self.USER_TYPE" />
+          <AssociationSet Name="Address_Person" Association="Self.Address_Person">
+            <End Role="ADDRESS" EntitySet="ADDRESS" />
+            <End Role="PERSON" EntitySet="PERSON" />
+          </AssociationSet>
+          <AssociationSet Name="Client_Service" Association="Self.Client_Service">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="SERVICE" EntitySet="SERVICE" />
+          </AssociationSet>
+          <AssociationSet Name="Person_Client" Association="Self.Person_Client">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="Person_id" Association="Self.Person_id">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="PROFESSIONAL" EntitySet="PROFESSIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="Person_User" Association="Self.Person_User">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="Professional_ProfessionalType" Association="Self.Professional_ProfessionalType">
+            <End Role="PROFESSIONAL_TYPE" EntitySet="PROFESSIONAL_TYPE" />
+            <End Role="PROFESSIONAL" EntitySet="PROFESSIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="Sevice_Professional" Association="Self.Sevice_Professional">
+            <End Role="PROFESSIONAL" EntitySet="PROFESSIONAL" />
+            <End Role="SERVICE" EntitySet="SERVICE" />
+          </AssociationSet>
+          <AssociationSet Name="Service_UnpaidBills" Association="Self.Service_UnpaidBills">
+            <End Role="SERVICE" EntitySet="SERVICE" />
+            <End Role="UNPAID_BILLS" EntitySet="UNPAID_BILLS" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProvider_Service" Association="Self.ServiceProvider_Service">
+            <End Role="SERVICE_PROVIDER" EntitySet="SERVICE_PROVIDER" />
+            <End Role="SERVICE" EntitySet="SERVICE" />
+          </AssociationSet>
+          <AssociationSet Name="UserType_User" Association="Self.UserType_User">
+            <End Role="USER_TYPE" EntitySet="USER_TYPE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENT_FILE" Association="Self.CLIENT_FILE">
+            <End Role="FILE" EntitySet="FILE" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="PHONE_PERSON" Association="Self.PHONE_PERSON">
+            <End Role="PHONE" EntitySet="PHONE" />
+            <End Role="PERSON" EntitySet="PERSON" />
+          </AssociationSet>
+          <AssociationSet Name="SERVICE_FILE" Association="Self.SERVICE_FILE">
+            <End Role="SERVICE" EntitySet="SERVICE" />
+            <End Role="FILE" EntitySet="FILE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EspacoMemoriaVivaModelStoreContainer" CdmEntityContainer="EspacoMemoriaVivaEntities1">
+          <EntitySetMapping Name="ADDRESS">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.ADDRESS">
+              <MappingFragment StoreEntitySet="ADDRESS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Suplement" ColumnName="Suplement" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENT">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.CLIENT">
+              <MappingFragment StoreEntitySet="CLIENT">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
+                <ScalarProperty Name="CLIENTId" ColumnName="CLIENTId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FILE">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.FILE">
+              <MappingFragment StoreEntitySet="FILE">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSON">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.PERSON">
+              <MappingFragment StoreEntitySet="PERSON">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+                <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHONE">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.PHONE">
+              <MappingFragment StoreEntitySet="PHONE">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROFESSIONAL">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.PROFESSIONAL">
+              <MappingFragment StoreEntitySet="PROFESSIONAL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
+                <ScalarProperty Name="ProfessionalType_Id" ColumnName="ProfessionalType_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROFESSIONAL_TYPE">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.PROFESSIONAL_TYPE">
+              <MappingFragment StoreEntitySet="PROFESSIONAL_TYPE">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICE">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.SERVICE">
+              <MappingFragment StoreEntitySet="SERVICE">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Professional_Id" ColumnName="Professional_Id" />
+                <ScalarProperty Name="ServiceProvider_Id" ColumnName="ServiceProvider_Id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICE_PROVIDER">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.SERVICE_PROVIDER">
+              <MappingFragment StoreEntitySet="SERVICE_PROVIDER">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNPAID_BILLS">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.UNPAID_BILLS">
+              <MappingFragment StoreEntitySet="UNPAID_BILLS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="PaymentMethod_Id" ColumnName="PaymentMethod_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Service_Id" ColumnName="Service_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
+                <ScalarProperty Name="UserType_Id" ColumnName="UserType_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_TYPE">
+            <EntityTypeMapping TypeName="EspacoMemoriaVivaModel.USER_TYPE">
+              <MappingFragment StoreEntitySet="USER_TYPE">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CLIENT_FILE" TypeName="EspacoMemoriaVivaModel.CLIENT_FILE" StoreEntitySet="CLIENT_FILE">
+            <EndProperty Name="FILE">
+              <ScalarProperty Name="Id" ColumnName="File_Id" />
+            </EndProperty>
+            <EndProperty Name="CLIENT">
+              <ScalarProperty Name="Id" ColumnName="Client_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PHONE_PERSON" TypeName="EspacoMemoriaVivaModel.PHONE_PERSON" StoreEntitySet="PHONE_PERSON">
+            <EndProperty Name="PHONE">
+              <ScalarProperty Name="Id" ColumnName="Phone_Id" />
+            </EndProperty>
+            <EndProperty Name="PERSON">
+              <ScalarProperty Name="Id" ColumnName="Person_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SERVICE_FILE" TypeName="EspacoMemoriaVivaModel.SERVICE_FILE" StoreEntitySet="SERVICE_FILE">
+            <EndProperty Name="SERVICE">
+              <ScalarProperty Name="Id" ColumnName="Service_Id" />
+            </EndProperty>
+            <EndProperty Name="FILE">
+              <ScalarProperty Name="Id" ColumnName="File_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
