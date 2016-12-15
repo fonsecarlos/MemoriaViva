@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MemoriaViva.Controllers
 {
-    public class HomeController : Controller
+    public class BasicoController : Controller
     {
         public ActionResult Index()
         {
@@ -23,6 +23,21 @@ namespace MemoriaViva.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(int id, String senha)
+        {
 
             return View();
         }

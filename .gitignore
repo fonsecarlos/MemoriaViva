@@ -240,3 +240,24 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/MemoriaViva/MemoriaViva/Models/ADDRESS.cs
+/MemoriaViva/MemoriaViva/Models/USER_TYPE.cs
+/MemoriaViva/MemoriaViva/Models/USER.cs
+/MemoriaViva/MemoriaViva/Models/UNPAID_BILLS.cs
+/MemoriaViva/MemoriaViva/Models/SERVICE_PROVIDER.cs
+/MemoriaViva/MemoriaViva/Models/SERVICE.cs
+/MemoriaViva/MemoriaViva/Models/PROFESSIONAL_TYPE.cs
+/MemoriaViva/MemoriaViva/Models/PROFESSIONAL.cs
+/MemoriaViva/MemoriaViva/Models/PHONE.cs
+/MemoriaViva/MemoriaViva/Models/PERSON.cs
+/MemoriaViva/MemoriaViva/Models/MemoriaViva.tt
+/MemoriaViva/MemoriaViva/Models/MemoriaViva.edmx.diagram
+/MemoriaViva/MemoriaViva/Models/MemoriaViva.edmx
+/MemoriaViva/MemoriaViva/Models/MemoriaViva.Designer.cs
+/MemoriaViva/MemoriaViva/Models/MemoriaViva.cs
+/MemoriaViva/MemoriaViva/Models/MemoriaViva.Context.tt
+/MemoriaViva/MemoriaViva/Models/MemoriaViva.Context.cs
+/MemoriaViva/MemoriaViva/Models/FILE.cs
+/MemoriaViva/MemoriaViva/Models/CLIENT.cs
+/MemoriaViva/MemoriaViva/Web.config
+
