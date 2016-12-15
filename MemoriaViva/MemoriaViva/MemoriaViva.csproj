@@ -176,8 +176,59 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ADDRESS.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLIENT.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FILE.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MemoriaViva.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemoriaViva.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemoriaViva.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MemoriaViva.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemoriaViva.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PERSON.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PHONE.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROFESSIONAL.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROFESSIONAL_TYPE.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SERVICE.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SERVICE_PROVIDER.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UNPAID_BILLS.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER_TYPE.cs">
+      <DependentUpon>MemoriaViva.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -187,8 +238,25 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\MemoriaViva.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MemoriaViva.edmx</DependentUpon>
+      <LastGenOutput>MemoriaViva.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MemoriaViva.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MemoriaViva.edmx</DependentUpon>
+      <LastGenOutput>MemoriaViva.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\MemoriaViva.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MemoriaViva.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MemoriaViva.edmx.diagram">
+      <DependentUpon>MemoriaViva.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
